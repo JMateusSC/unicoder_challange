@@ -26,6 +26,7 @@ class Task(Base):
     __tablename__ = "tasks"
 
     id = Column(Integer, primary_key=True)
+    related_user_id = Column(Integer)
     status = Column(String(255), nullable=False)
     title = Column(String(255), nullable=False)
     description = Column(String(10000), nullable=False)

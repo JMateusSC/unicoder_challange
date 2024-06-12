@@ -16,7 +16,7 @@ async def get_tasks(dependencies: str = Depends(JWTBearer()), session: Session =
     payload = decodeJWT(token)
     user_id = payload['sub']
 
-    tasks = session.query(models.Product).filter(models.Product.related_user_id == user_id).all()
+    tasks = session.query(models.Task).filter(models.Task.related_user_id == user_id).all()
     return tasks
 
 
@@ -26,7 +26,7 @@ async def get_task_by_id(task_id: int, dependencies: str = Depends(JWTBearer()),
     token = dependencies
     payload = decodeJWT(token)
     user_id = payload['sub']
-
+    print(user_id)
     existing_task = session.query(models.Task).filter(models.Task.id == task_id).first()
     if existing_task is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Task not found")
@@ -44,7 +44,18 @@ async def create_task(task: schemas.TaskCreate, dependencies: str = Depends(JWTB
     payload = decodeJWT(token)
     user_id = payload['sub']
 
-    new_task = models.Task(name=task.name, description=task.description, related_user_id=user_id, price=task.price)
+    new_task = models.Task(
+        related_user_id = user_id,
+        status = task.status, 
+        title = task.title, 
+        description = task.description, 
+        dead_line = task.dead_line, 
+        creation_date = task.creation_date, 
+        end_date = task.end_date, 
+        expected_time = task.expected_time, 
+        registered_time = task.registered_time, 
+    )
+    
     session.add(new_task)
     session.commit()
     session.refresh(new_task)
@@ -65,9 +76,14 @@ async def update_task(task: schemas.TaskUpdate, dependencies: str = Depends(JWTB
     if existing_task.related_user_id != user_id:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
 
-    existing_task.name = task.name
+    existing_task.status = task.status
+    existing_task.title = task.title
     existing_task.description = task.description
-    existing_task.price = task.price
+    existing_task.dead_line = task.dead_line
+    existing_task.end_date = task.end_date
+    existing_task.expected_time = task.expected_time
+    existing_task.registered_time = task.registered_time
+
     session.commit()
     return {"message": "Task updated successfully"}
 
@@ -86,14 +102,22 @@ async def update_partial_task(task: schemas.TaskFetch, dependencies: str = Depen
     if existing_task.related_user_id != user_id:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
 
-    if task.name:
-        existing_task.name = task.name
-    
+    if task.status:
+        existing_task.status = task.status
+    if task.title:
+        existing_task.title = task.title
     if task.description:
         existing_task.description = task.description
-
-    if task.price:
-        existing_task.price = task.price
+    if task.dead_line:
+        existing_task.dead_line = task.dead_line
+    if task.creation_date:
+        existing_task.creation_date = task.creation_date
+    if task.end_date:
+        existing_task.end_date = task.end_date
+    if task.expected_time:
+        existing_task.expected_time = task.expected_time
+    if task.registered_time:
+        existing_task.registered_time = task.registered_time
 
     session.commit()
     return {"message": "Task updated successfully"}

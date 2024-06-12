@@ -37,11 +37,11 @@ class TaskCreate(BaseModel):
     status:str
     title:str
     description:str
-    dead_line:str
-    creation_date:str
-    end_date:str
-    expected_time:str
-    registered_time:str
+    dead_line:datetime.datetime
+    creation_date:datetime.datetime
+    end_date:datetime.datetime
+    expected_time:int
+    registered_time:int
 
 class TaskUpdate(BaseModel):
     id: int
