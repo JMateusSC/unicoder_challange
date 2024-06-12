@@ -31,27 +31,3 @@ class TokenCreate(BaseModel):
     refresh_token:str
     status:bool
     created_date:datetime.datetime
-    
-
-class ProductCreate(BaseModel):
-    name:str
-    description:str
-    price:int
-
-
-class ProductUpdate(BaseModel):
-    id: int
-    name:str
-    description:str
-    price:int
-
-
-class ProductFetch(BaseModel):
-    id: int
-    name: Optional[str] = None
-    description: Optional[str] = None
-    price: Optional[int] = None
-
-
-class ProductDelete(BaseModel):
-    id: int

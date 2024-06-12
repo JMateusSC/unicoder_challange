@@ -22,12 +22,3 @@ class Token(Base):
     status = Column(Boolean)
     created_date = Column(DateTime, default=datetime.datetime.now(datetime.timezone.utc))
 
-
-class Product(Base):
-    __tablename__ = "products"
-
-    id = Column(Integer, primary_key=True)
-    related_user_id = Column(Integer, nullable=False)
-    name = Column(String(100), nullable=False)
-    description = Column(String(100), nullable=False)
-    price = Column(Integer, nullable=False)
