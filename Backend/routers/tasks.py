@@ -6,7 +6,7 @@ import schemas
 from commom import get_session, token_required
 
 
-router = APIRouter(prefix="/tasks", tags=["Tasks"])
+router = APIRouter(prefix="/api/tasks", tags=["Tasks"])
 
 
 @router.get('/get_all')

@@ -9,7 +9,7 @@ from auth_bearer import JWTBearer
 from commom import get_session, token_required
 
 
-router = APIRouter(prefix="/user", tags=["Users"])
+router = APIRouter(prefix="/api/user", tags=["Users"])
 
 
 @router.post("/register")
