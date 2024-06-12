@@ -1,6 +1,7 @@
 from dotenv import dotenv_values
 
 secrets = dotenv_values(".env")
+#secrets = dotenv_values("Backend/.env")
 
 DATABASE_URL = secrets['DATABASE_URL']
 JWT_SECRET_KEY = secrets['JWT_SECRET_KEY']
