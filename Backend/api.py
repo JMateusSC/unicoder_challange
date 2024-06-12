@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 import uvicorn
-from routers import user, products, tasks
+from routers import user, tasks
 
 app = FastAPI()
 

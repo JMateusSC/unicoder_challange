@@ -1,6 +1,5 @@
-from sqlalchemy import Column, Integer, DateTime, Boolean
+from sqlalchemy import Column, Integer, DateTime, Boolean, String, Text, Float
 from database import Base
-from sqlalchemy import String
 import datetime
 
 
@@ -22,3 +21,16 @@ class Token(Base):
     status = Column(Boolean)
     created_date = Column(DateTime, default=datetime.datetime.now(datetime.timezone.utc))
 
+
+class Task(Base):
+    __tablename__ = "tasks"
+
+    id = Column(Integer, primary_key=True)
+    status = Column(String(255), nullable=False)
+    title = Column(String(255), nullable=False)
+    description = Column(String(10000), nullable=False)
+    dead_line = Column(DateTime, default=datetime.datetime.now(datetime.timezone.utc))
+    creation_date = Column(DateTime, default=datetime.datetime.now(datetime.timezone.utc))
+    end_date = Column(DateTime, default=datetime.datetime.now(datetime.timezone.utc))
+    expected_time = Column(Integer, nullable=False)
+    registered_time = Column(Integer, nullable=False)
