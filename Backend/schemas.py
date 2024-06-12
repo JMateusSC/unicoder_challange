@@ -33,25 +33,36 @@ class TokenCreate(BaseModel):
     created_date:datetime.datetime
     
 
-class ProductCreate(BaseModel):
-    name:str
+class TaskCreate(BaseModel):
+    status:str
+    title:str
     description:str
-    price:int
+    dead_line:str
+    creation_date:str
+    end_date:str
+    expected_time:str
+    registered_time:str
 
-
-class ProductUpdate(BaseModel):
+class TaskUpdate(BaseModel):
     id: int
-    name:str
+    status:str
+    title:str
     description:str
-    price:int
+    dead_line:str
+    end_date:str
+    expected_time:str
+    registered_time:str
 
-
-class ProductFetch(BaseModel):
+class TaskFetch(BaseModel):
     id: int
-    name: Optional[str] = None
-    description: Optional[str] = None
-    price: Optional[int] = None
+    status:Optional[str]
+    title:Optional[str]
+    description:Optional[str]
+    dead_line:Optional[str]
+    creation_date:Optional[str]
+    end_date:Optional[str]
+    expected_time:Optional[str]
+    registered_time:Optional[str]
 
-
-class ProductDelete(BaseModel):
+class TaskDelete(BaseModel):
     id: int
