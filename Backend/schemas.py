@@ -48,21 +48,20 @@ class TaskUpdate(BaseModel):
     status:str
     title:str
     description:str
-    dead_line:str
-    end_date:str
-    expected_time:str
-    registered_time:str
+    dead_line:datetime.datetime
+    end_date:datetime.datetime
+    expected_time:int
+    registered_time:int
 
 class TaskFetch(BaseModel):
     id: int
-    status:Optional[str]
-    title:Optional[str]
-    description:Optional[str]
-    dead_line:Optional[str]
-    creation_date:Optional[str]
-    end_date:Optional[str]
-    expected_time:Optional[str]
-    registered_time:Optional[str]
+    status:Optional[str] = None
+    title:Optional[str] = None
+    description:Optional[str] = None
+    dead_line:Optional[datetime.datetime] = None
+    end_date:Optional[datetime.datetime] = None
+    expected_time:Optional[int] = None
+    registered_time:Optional[int] = None
 
 class TaskDelete(BaseModel):
     id: int

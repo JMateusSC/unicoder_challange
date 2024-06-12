@@ -27,11 +27,13 @@ async def get_task_by_id(task_id: int, dependencies: str = Depends(JWTBearer()),
     payload = decodeJWT(token)
     user_id = payload['sub']
     print(user_id)
-    existing_task = session.query(models.Task).filter(models.Task.id == task_id).first()
+    existing_task = session.query(models.Task).filter(models.Task.id == int(task_id)).first()
+
+    print(existing_task.related_user_id)
     if existing_task is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Task not found")
     
-    if (existing_task.related_user_id != user_id):
+    if (int(existing_task.related_user_id) != int(user_id)):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
 
     return existing_task
@@ -69,11 +71,11 @@ async def update_task(task: schemas.TaskUpdate, dependencies: str = Depends(JWTB
     payload = decodeJWT(token)
     user_id = payload['sub']
 
-    existing_task = session.query(models.Task).filter(models.Task.id == task.id).first()
+    existing_task = session.query(models.Task).filter(models.Task.id == int(task.id)).first()
     if existing_task is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Task not found")
 
-    if existing_task.related_user_id != user_id:
+    if int(existing_task.related_user_id) != int(user_id):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
 
     existing_task.status = task.status
@@ -95,11 +97,11 @@ async def update_partial_task(task: schemas.TaskFetch, dependencies: str = Depen
     payload = decodeJWT(token)
     user_id = payload['sub']
 
-    existing_task = session.query(models.Task).filter(models.Task.id == task.id).first()
+    existing_task = session.query(models.Task).filter(models.Task.id == int(task.id)).first()
     if existing_task is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Task not found")
 
-    if existing_task.related_user_id != user_id:
+    if int(existing_task.related_user_id) != int(user_id):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
 
     if task.status:
@@ -110,8 +112,6 @@ async def update_partial_task(task: schemas.TaskFetch, dependencies: str = Depen
         existing_task.description = task.description
     if task.dead_line:
         existing_task.dead_line = task.dead_line
-    if task.creation_date:
-        existing_task.creation_date = task.creation_date
     if task.end_date:
         existing_task.end_date = task.end_date
     if task.expected_time:
@@ -130,11 +130,11 @@ async def delete_task_by_id(task_id: int, dependencies: str = Depends(JWTBearer(
     payload = decodeJWT(token)
     user_id = payload['sub']
 
-    query_result = session.query(models.Task).filter(models.Task.id == task_id)
+    query_result = session.query(models.Task).filter(models.Task.id == int(task_id))
     if query_result.first() is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Task not found")
 
-    if query_result.first().related_user_id != user_id:
+    if int(query_result.first().related_user_id) != int(user_id):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
 
     query_result.delete()
