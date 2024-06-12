@@ -72,16 +72,16 @@
                                 </div>
                                 </span>
                                 <div class="col-lg">
-                                    <label for="restrictionAddHumidity" class="form-label">Tempo Esperado:</label>
-                                    <input type="text" class="form-control time" id="restrictionAddHumidity" placeholder="Insira o Tempo Esperado" name="time">
+                                    <label for="expectedTime" class="form-label">Tempo Esperado:</label>
+                                    <input type="text" class="form-control time" id="expectedTime" placeholder="Insira o Tempo Esperado" name="time">
                                 <div class="invalid-feedback">Insira o Tempo Esperado</div>
                             </div>
                         </div>
                             
                         </div>                    
                         <div class="mb-3">
-                            <label for="restrictionAddObs" class="form-label">Descrição</label>
-                            <textarea class="form-control addObs" id="restrictionAddObs" placeholder="Observações/detalhes da tarefa" rows="5" name="addObs"></textarea>
+                            <label for="restrictionAddDescriptions" class="form-label">Descrição</label>
+                            <textarea class="form-control addObs" id="restrictionAddDescriptions" placeholder="Observações/detalhes da tarefa" rows="5" name="addObs"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer pt-0">
