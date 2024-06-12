@@ -86,7 +86,6 @@ ENV/
 *.log
 
 # Local env files
-.env
 .env.*
 
 # System Files
