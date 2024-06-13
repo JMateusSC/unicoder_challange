@@ -4,7 +4,7 @@ import models
 from auth_bearer import JWTBearer, decodeJWT
 import schemas
 from commom import get_session, token_required
-
+import datetime
 
 router = APIRouter(prefix="/api/tasks", tags=["Tasks"])
 
@@ -106,6 +106,8 @@ async def update_partial_task(task: schemas.TaskFetch, dependencies: str = Depen
 
     if task.status:
         existing_task.status = task.status
+        if task.status == "DONE":
+            existing_task.end_date = datetime.datetime.now(datetime.timezone.utc)
     if task.title:
         existing_task.title = task.title
     if task.description:

@@ -39,7 +39,7 @@ class TaskCreate(BaseModel):
     description:str
     dead_line:datetime.datetime
     creation_date:Optional[datetime.datetime] = None
-    end_date:datetime.datetime
+    end_date:Optional[datetime.datetime] = None
     expected_time:int
     registered_time:int
 
