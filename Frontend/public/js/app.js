@@ -4,7 +4,7 @@ let button = document.getElementById("btnSaveEvent");
 button.addEventListener("click", create_task);
 
 function create_task(params) {
-    let token = document.cookie["auth_token"];
+    let token = getCookie("auth_token");
 
     let AddTitle = document.getElementById("AddTitle");
     let restrictionAddDescriptions = document.getElementById("restrictionAddDescriptions");
@@ -24,6 +24,7 @@ function create_task(params) {
         }
         else
         {   
+            console.log(payload);
             console.log(token);
             console.log("Response status:" + xhttp.status)
             console.log("Response error:" + xhttp.responseText)
@@ -36,3 +37,18 @@ function create_task(params) {
     
     xhttp.send(JSON.stringify(payload));
 }
+
+function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
