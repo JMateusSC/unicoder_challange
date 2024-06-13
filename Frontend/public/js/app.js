@@ -4,7 +4,7 @@ let button = document.getElementById("btnSaveEvent");
 button.addEventListener("click", create_task);
 
 function create_task(params) {
-    let token = getCookie("auth_token");
+    let token = getCookie("XSRF-TOKEN");
 
     let AddTitle = document.getElementById("AddTitle");
     let restrictionAddDescriptions = document.getElementById("restrictionAddDescriptions");

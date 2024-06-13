@@ -16,37 +16,14 @@
             <div class="panel-heading">
                 <h1 class="textPurple textBold text-center">Lista de Tarefas</h1>
             </div>
-            <hr class="line">
-            <div class="row" >
-                <div class="col-md-4 p-2">
-                    <h4 class="text-center textTodo">TODO</h4>
-                    <div class="m-2 p-3 card-todo">
-                        <div class="card p-2">
-                            <p class="textCardTitle">Título:</p>
-                            <p class="text-center">TESTE</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 p-2">
-                    <h4 class="text-center textDoing">DOING</h4>
-                    <div class="m-2 p-3 card-doing">
-                        <div class="card p-2">
-                            <p class="textCardTitle">Título:</p>
-                            <p class="text-center">TESTE</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 p-2">
-                    <h4 class="text-center textDone">DONE</h4>
-                    <div class="m-2 p-3 card-done">
-                        <div class="card p-2">
-                            <p class="textCardTitle">Título:</p>
-                            <p class="text-center">TESTE</p>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>     
+            @foreach ($data as $dt)
+            <div class="m-5 card-done">            
+                <p style="text-align: center;">ID: {{$dt['id']}}</p>                
+                <p style="text-align: center;">Título: {{$dt['title']}}</p>
+                <p style="text-align: center;">Status: {{$dt['status']}}</p>
+                <p style="text-align: center;">Descrição: {{$dt['description']}}</p> 
+            </div>
+        @endforeach     
         </div>
         <div class="modal fade" id="ModalAdd" tabindex="-1" aria-labelledby="AddModal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -57,37 +34,40 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <!-- Body -->
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="AddTitle" class="form-label">TíTulo:</label>
-                            <input type="text" class="form-control time" id="AddTitle" placeholder="Insira o Título" name="time">
-                        </div>
+                    <form method="POST" action="{{ route('create') }}">
+                        <div class="modal-body">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="AddTitle" class="form-label">TíTulo:</label>
+                                <input type="text" class="form-control time" id="AddTitle" placeholder="Insira o Título" name="title">
+                            </div>
 
-                        <div class="mb-3">
-                            <div class="row">
-                                <div class="col-lg">
-                                    <label for="restrictionAddDate" class="form-label">Data Limite: </label>
-                                    <input type="date" class="form-control addDate" id="restrictionaddDate" name="addDate">
-                                    <div class="invalid-feedback">Insira a data limite</div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-lg">
+                                        <label for="restrictionAddDate" class="form-label">Data Limite: </label>
+                                        <input type="date" class="form-control addDate" id="restrictionaddDate" name="addDate">
+                                        <div class="invalid-feedback">Insira a data limite</div>
+                                    </div>
+                                    </span>
+                                    <div class="col-lg">
+                                        <label for="expectedTime" class="form-label">Tempo Esperado:</label>
+                                        <input type="text" class="form-control time" id="expectedTime" placeholder="Insira o Tempo Esperado" name="time">
+                                    <div class="invalid-feedback">Insira o Tempo Esperado</div>
                                 </div>
-                                </span>
-                                <div class="col-lg">
-                                    <label for="expectedTime" class="form-label">Tempo Esperado:</label>
-                                    <input type="text" class="form-control time" id="expectedTime" placeholder="Insira o Tempo Esperado" name="time">
-                                <div class="invalid-feedback">Insira o Tempo Esperado</div>
+                            </div>
+                                
+                            </div>                    
+                            <div class="mb-3">
+                                <label for="restrictionAddDescriptions" class="form-label">Descrição</label>
+                                <textarea class="form-control addObs" id="restrictionAddDescriptions" placeholder="Observações/detalhes da tarefa" rows="5" name="addObs"></textarea>
                             </div>
                         </div>
-                            
-                        </div>                    
-                        <div class="mb-3">
-                            <label for="restrictionAddDescriptions" class="form-label">Descrição</label>
-                            <textarea class="form-control addObs" id="restrictionAddDescriptions" placeholder="Observações/detalhes da tarefa" rows="5" name="addObs"></textarea>
+                        <div class="modal-footer pt-0">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary light add_restriction">Salvar</button>
                         </div>
-                    </div>
-                    <div class="modal-footer pt-0">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary light add_restriction" id="btnSaveEvent">Salvar</button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

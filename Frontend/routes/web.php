@@ -13,4 +13,6 @@ Route::post('/login', [AuthController::class,'login']);
 Route::get('/register', [AuthController::class,'indexRegister'])->name('register');
 Route::post('/register', [AuthController::class,'register']);
 
+Route::post('/task', [HomeController::class,'create'])->name('create');
+
 Route::get('/logout', [AuthController::class,'logout'])->name('logout');
