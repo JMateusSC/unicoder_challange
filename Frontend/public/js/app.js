@@ -1,12 +1,10 @@
-import './bootstrap';
-
-var api_base_url = "http/localhost:8000/api/"
+var api_base_url = "http://127.0.0.1:8000/api/";
 
 let button = document.getElementById("btnSaveEvent");
-button.addEventListener("click", create_task)
+button.addEventListener("click", create_task);
 
 function create_task(params) {
-    let token = document.cookie["auth_token"]
+    let token = document.cookie["auth_token"];
 
     let AddTitle = document.getElementById("AddTitle");
     let restrictionAddDescriptions = document.getElementById("restrictionAddDescriptions");
@@ -25,15 +23,16 @@ function create_task(params) {
             window.location.replace("/home");
         }
         else
-        {
+        {   
+            console.log(token);
             console.log("Response status:" + xhttp.status)
             console.log("Response error:" + xhttp.responseText)
             alert("Falha ao criar a tarefa! Por favor, tente novamente.")
         }
     };
-    
-    xhttp.setRequestHeader("Authorization", token);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.open("POST", api_base_url + "tasks/create");
+    xhttp.setRequestHeader("Authorization", token);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    
     xhttp.send(JSON.stringify(payload));
 }

@@ -21,16 +21,16 @@
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
     <div class="container">
         <main class="form-signin w-100 m-auto p-5 textPurple">
-            <form>
+            <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <h1 class="textBold mb-3 text-center">Login</h1>
             
                 <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
                     <label for="floatingInput">Email</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
                     <label for="floatingPassword">Senha</label>
                 </div>
             
